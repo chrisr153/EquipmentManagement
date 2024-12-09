@@ -23,15 +23,19 @@ import jakarta.transaction.Transactional;
 @Service
 public class EquipmentService {
 
-    // Autowired DAOs
+
     @Autowired
     private EquipmentDao equipmentDao;
+    
     @Autowired
     private EmployeeDao employeeDao;
+    
     @Autowired
     private JobDao jobDao;
 
-    // Equipment Methods
+    // Grouped Methods by function for easier readability. 
+    
+    // Equipment Methods-retrieving, updating, and deleting.
     public List<JobEquipment> retrieveAllEquipment() {
         List<Equipment> equipments = equipmentDao.findAll();
         List<JobEquipment> result = new LinkedList<>();
@@ -65,7 +69,7 @@ public class EquipmentService {
         equipmentDao.delete(equipment);
     }
 
-    // Employee Methods
+    // Employee Methods- retrieving, updating, and deleting.
     public List<JobEmployee> retrieveAllEmployees() {
         List<Employee> employees = employeeDao.findAll();
         List<JobEmployee> result = new LinkedList<>();
@@ -105,18 +109,21 @@ public class EquipmentService {
         employeeDao.delete(employee);
     }
     @Transactional 
-    public Employee saveJobEmployee(Long jobId, JobEmployee jobEmployee) { 
-    	Job job = findJobById(jobId); 
+    public Employee saveJobEmployee(JobEmployee jobEmployee) { 
+       	Long jobId = jobEmployee.getJobId();
     	Long employeeId = jobEmployee.getEmployeeId(); 
     	Employee employee = findOrCreateEmployee(employeeId); 
-    	copyEmployeeFields(employee, jobEmployee); 
-    	employee.setJob(job); 
-    	job.getEmployee().add(employee); 
-    	Employee dbEmployee = employeeDao.save(employee); 
+    	copyEmployeeFieldsPost(employee, jobEmployee); 
+    	Job job = findJobById(jobId);
+    	employee.setJob(job);
+    	job.getEmployee().add(employee);
+    	employee = employeeDao.save(employee); 
     	
-    	return dbEmployee; }
+    	return employee;
+    }
 
-    // Job Methods
+   
+    // Job Methods- retrieving, saving , and updating.
     public List<JobData> retrieveAllJobs() {
         List<Job> jobs = jobDao.findAll();
         List<JobData> jobResult = new LinkedList<>();
@@ -141,7 +148,8 @@ public class EquipmentService {
         return new JobData(job);
     }
 
-    // Helper Methods
+
+    //Helper Methods perform copying and finding entities. 
     private Equipment findOrCreateEquipment(Long equipmentId) {
         if (Objects.isNull(equipmentId)) {
             return new Equipment();
@@ -171,6 +179,7 @@ public class EquipmentService {
         return findEmployeeById(employeeId);
     }
 
+    //This method is used for GET request.
     private void copyEmployeeFields(Employee employee, JobEmployee jobEmployee) {
     	jobEmployee.setEmployeeId(employee.getEmployeeId()); 
     	jobEmployee.setEmployeeFirstName(employee.getEmployeeFirstName()); 
@@ -178,6 +187,19 @@ public class EquipmentService {
     	jobEmployee.setEmployeeJobTitle(employee.getEmployeeJobTitle()); 
     	jobEmployee.setEmployeePhone(employee.getEmployeePhone()); 
     	jobEmployee.setEmployeeEmail(employee.getEmployeeEmail());
+
+    	
+    }
+    
+    //This method is used for POST request. 
+    private void copyEmployeeFieldsPost(Employee employee, JobEmployee jobEmployee) {
+    	employee.setEmployeeId(jobEmployee.getEmployeeId()); 
+    	employee.setEmployeeFirstName(jobEmployee.getEmployeeFirstName()); 
+    	employee.setEmployeeLastName(jobEmployee.getEmployeeLastName()); 
+    	employee.setEmployeeJobTitle(jobEmployee.getEmployeeJobTitle()); 
+    	employee.setEmployeePhone(jobEmployee.getEmployeePhone()); 
+    	employee.setEmployeeEmail(jobEmployee.getEmployeeEmail());
+
     	
     }
 

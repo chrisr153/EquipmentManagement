@@ -29,6 +29,7 @@ public class Employee {
     private String employeeJobTitle;
     private String employeeEmail;
 
+
     @ManyToOne
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
@@ -40,8 +41,5 @@ public class Employee {
     @ToString.Exclude
     private Set<Equipment> equipment;
 
-    public Set<Equipment> getEquipment() {
-        return equipment;
-    }
-    
-}
+	
+ }

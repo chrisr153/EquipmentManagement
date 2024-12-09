@@ -71,9 +71,10 @@ public class EquipmentController {
     //EMPLOYEE
     @PostMapping("/{jobId}/employee")
     @ResponseStatus(code= HttpStatus.CREATED)
-   public Employee addEmployeeToJob(@PathVariable Long jobId, @RequestBody JobEmployee employee) {
-        log.info("Creating Employee record for job with ID={}", jobId);
-        return equipmentService.saveJobEmployee(jobId, employee);
+    public Employee addEmployeeToJob(@PathVariable Long jobId, @RequestBody JobEmployee jobEmployee) {
+    	log.info("Creating Employee record for job with ID={}", jobId);
+    	jobEmployee.setJobId(jobId);
+        return equipmentService.saveJobEmployee(jobEmployee);
     }
     @PutMapping("/equipment/{equipmentId}")
     public JobEquipment updateJobEquipment(@PathVariable Long equipmentId, @RequestBody JobEquipment jobEquipment) {

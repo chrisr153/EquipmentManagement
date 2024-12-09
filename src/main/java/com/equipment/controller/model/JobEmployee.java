@@ -16,17 +16,21 @@ public class JobEmployee {
 			private String employeeJobTitle;
 			private String employeePhone;
 			private String employeeEmail;
+			private Long jobId;
 			
-			public JobEmployee (JobEmployee savedJobEmployee) {
+			public JobEmployee (JobEmployee jobEmployee) {
 				
-				employeeId = savedJobEmployee.getEmployeeId();
-				employeeFirstName = savedJobEmployee.getEmployeeFirstName();
-				employeeLastName = savedJobEmployee.getEmployeeLastName();
-				employeeJobTitle = savedJobEmployee.getEmployeeJobTitle();
-				employeePhone = savedJobEmployee.getEmployeePhone();
-				employeeEmail = savedJobEmployee.getEmployeeEmail();
+				employeeId = jobEmployee.getEmployeeId();
+				employeeFirstName = jobEmployee.getEmployeeFirstName();
+				employeeLastName = jobEmployee.getEmployeeLastName();
+				employeeJobTitle = jobEmployee.getEmployeeJobTitle();
+				employeePhone = jobEmployee.getEmployeePhone();
+				employeeEmail = jobEmployee.getEmployeeEmail();
+				jobId=jobEmployee.getJobId();
 				
 			}
 
+			
+		
 
 }
