@@ -104,15 +104,7 @@ public class EquipmentController {
     
     }
 
-    //@DeleteMapping("/{equipmentId}")
-    //public Map<String, String> deleteEquipmentById(@PathVariable Long equipmentId) {
-    //    log.info("Deleting equipment info with ID={}", equipmentId);
-     //   equipmentService.deleteEquipmentById(equipmentId);
-    //    return Map.of("message", "Equipment with ID=" + equipmentId + " was deleted.");
-    //}
-
     // EMPLOYEE CRUD OPERATIONS
-
     @PutMapping("/employee/{employeeId}")
     public Employee updateEmployee(@PathVariable Long employeeId, @RequestBody JobEmployee employee) {
         employee.setEmployeeId(employeeId);

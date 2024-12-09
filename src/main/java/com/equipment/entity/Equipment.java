@@ -41,8 +41,5 @@ public class Equipment {
                inverseJoinColumns = @JoinColumn(name = "equipment_id"))
     private Set<Employee> employee; 
     
-    public Set<Employee> getEmployee() {
-    	return employee;
-    }
-    
+      
 }
