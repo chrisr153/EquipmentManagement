@@ -1,0 +1,238 @@
+JOB CRUD OPERATIONS
+
+HEADERS: 
+	Accept application/json
+	Content-Type application/json
+
+
+POST- JOB JSON INFORMATION
+
+http://localhost:8080/equipment/job
+
+{
+  "jobName": "MV Underground 1",
+  "jobAddress": "123 Crown Valley Pkwy",
+  "jobCity": "Mission Viejo",
+  "jobState": "CA",
+  "jobZip": "92691",
+  "jobDescription": "100 Feet Underground Electrical Cabling",
+  "jobStartDate": "12-01-2024",
+  "jobEndDate": "01-31-2025"
+}
+
+{
+  "jobName": "Lake Forest 3",
+  "jobAddress": "214 El Toro Rd",
+  "jobCity": "Lake Forest",
+  "jobState": "CA",
+  "jobZip": "92630",
+  "jobDescription": "50 Feet Underground Gas Pipe",
+  "jobStartDate": "01-01-2025",
+  "jobEndDate": "01-31-2025"
+}
+
+{
+  "jobName": "MV Commerical 2",
+  "jobAddress": "949 OSO Pkwy",
+  "jobCity": "Mission Viejo",
+  "jobState": "CA",
+  "jobZip": "92691",
+  "jobDescription": "50 Feet Underground Electrical Cabling",
+  "jobStartDate": "12-15-2024",
+  "jobEndDate": "12-18-2024"
+}
+
+
+GET- RETRIEVE ALL JOBS
+
+http://localhost:8080/equipment/job
+
+GET- RETRIEVE JOB BY ID
+
+http://localhost:8080/equipment/job/{jobID}
+
+PUT
+
+http://localhost:8080/equipment/job/{jobID}
+
+{
+  "jobName": "MV Underground 1",
+  "jobAddress": "123 Crown Valley Pkwy",
+  "jobCity": "Mission Viejo",
+  "jobState": "CA",
+  "jobZip": "92691",
+  "jobDescription": "250 Feet Underground Electrical Cabling",
+  "jobStartDate": "12-01-2024",
+  "jobEndDate": "03-31-2025"
+}
+
+EQUIPMENT CRUD OPERATIONS
+
+POST- EQUIPMENT JSON INFORMATION
+*must post equipment to job.
+
+http://localhost:8080/equipment/{jobID}/equipment
+
+{ 
+"jobId":"1",
+"equipmentName":"Backhoe 415 4WD",
+"equipmentDescription":"4 wheel drive backhoe loader",
+"equipmentCondition":"Good",
+"firstServiceDate":"01-01-2015",
+"notes":"needs oil change 12-06/2024"
+
+}
+{ 
+"jobId":"1",
+"equipmentName":"Concrete Mixer",
+"equipmentDescription":"2 wheel towable mixer",
+"equipmentCondition":"Good",
+"firstServiceDate":"12-01-2024",
+"notes":"none"
+}
+
+{
+  "jobId": "1",
+  "equipmentName": "Excavator",
+  "equipmentDescription": "Hydraulic excavator with 360-degree rotation",
+  "equipmentCondition": "Excellent",
+  "firstServiceDate": "03-15-2023",
+  "notes": "Routine maintenance due soon"
+}
+
+{
+  "jobId": "1",
+  "equipmentName": "Bulldozer",
+  "equipmentDescription": "Crawler dozer with six-way blade",
+  "equipmentCondition": "Fair",
+  "firstServiceDate": "06-01-2020",
+  "notes": "Blade requires adjustment"
+}
+
+{
+  "jobId": "1",
+  "equipmentName": "Crane",
+  "equipmentDescription": "Mobile crane with 50-ton lift capacity",
+  "equipmentCondition": "Good",
+  "firstServiceDate": "11-20-2022",
+  "notes": "Inspect cables quarterly"
+}
+{ 
+"jobId":"2",
+"equipmentName":"Concrete Mixer",
+"equipmentDescription":"2 wheel towable mixer",
+"equipmentCondition":"Good",
+"firstServiceDate":"12-01-2024",
+"notes":"none"
+}
+{
+  "jobId": "2",
+  "equipmentName": "Crane",
+  "equipmentDescription": "Mobile crane with 50-ton lift capacity",
+  "equipmentCondition": "Good",
+  "firstServiceDate": "11-20-2022",
+  "notes": "Inspect cables quarterly"
+}
+
+PUT- UPDATE EQUIPMENT BY ID
+
+http://localhost:8080/equipment/equipment/{equipmentId}
+
+{ 
+"equipmentName":"Backhoe 415 4WD",
+"equipmentDescription":"4 wheel drive backhoe loader",
+"equipmentCondition":"Good",
+"firstServiceDate":"01-01-2015",
+"notes":"Oil Change completed",
+"jobId":"1"
+}
+
+GET- RETRIEVE ALL EQUIPMENT 
+*turn off headers accept and content-type before sending request. 
+
+http://localhost:8080/equipment/equipment
+
+GET- RETRIEVE EQUIPMENT BY ID
+
+http://localhost:8080/equipment/equipment/{equipmentId}
+
+DELETE- DELETE EQUIPMENT BY ID 
+
+http://localhost:8080/equipment/{equipmentId}
+
+{
+  "equipmentId":"4"
+}
+*ALTERNATIVELY- TURN OFF HEADERS ACCEPT AND Content-Type. Don't include body info just the equipmentID in the URL and send request. 
+Don't need a body json for deleting equipment. just include the id number in the url and send request. 
+
+
+POST EMPLOYEE JSON INFORMATION
+*must post employee to job 
+
+http://localhost:8080/equipment/{jobId}/employee
+
+{
+  "employeeFirstName":"Chris",
+  "employeeLastName":"Richardson",
+  "employeePhone":"800-Manager",
+  "employeeJobTitle":"CEO",
+  "employeeEmail":"Crichardson@json.com",
+  "jobId":"2"
+}
+{
+  "employeeFirstName": "Greg",
+  "employeeLastName": "Graffin",
+  "employeePhone": "800-BadReligion",
+  "employeeJobTitle": "Training and Safety",
+  "employeeEmail": "ggraffin@json.com",
+  "jobId":"3"
+}
+
+{
+  "employeeFirstName": "Tim",
+  "employeeLastName": "Armstrong",
+  "employeePhone": "800-Rancid",
+  "employeeJobTitle": "Axe",
+  "employeeEmail": "tarmstrong@json.com",
+  "jobId":"1"
+}
+{
+  "employeeFirstName": "Mike",
+  "employeeLastName": "Ness",
+  "employeePhone": "800-SocialD",
+  "employeeJobTitle": "Backhoe Operator",
+  "employeeEmail": "mness@json.com",
+  "jobId":"1"
+}
+
+
+GET- RETRIEVE ALL EMPLOYEES
+*turn off headers accept and content-type before sending request.
+
+http://localhost:8080/equipment/employee
+
+GET- RETRIEVE EMPLOYEE BY ID. 
+*turn off headers accept and content-type before sending request.
+
+http://localhost:8080/equipment/employee/{employeeId}
+
+
+PUT- UPDATE EMPLOYEE INFORMATION BY ID
+
+http://localhost:8080/equipment/employee/{employeeId}
+
+{
+  "employeeFirstName": "CHRIS",
+  "employeeLastName": "RICHARDSON",
+  "employeePhone": "800-SocialD",
+  "employeeJobTitle": "Backhoe Operator",
+  "employeeEmail": "mness@json.com",
+  "jobId":"1"
+}
+
+DELETE- DELETE EMPLOYEE BY ID
+*turn off content-type
+
+http://localhost:8080/equipment/employee/{employeeId}
+
