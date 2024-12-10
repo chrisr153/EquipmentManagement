@@ -30,6 +30,9 @@ public class JobEquipment {
 			equipmentCondition = equipment.getEquipmentCondition();
 			firstServiceDate = equipment.getFirstServiceDate();
 			notes = equipment.getNotes();
+			if(equipment.getJob()!= null) {
+				jobId= equipment.getJob().getJobId();
+			}
 			
 		}
 }

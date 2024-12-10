@@ -1,6 +1,8 @@
 package com.equipment.controller.model;
 
 
+import com.equipment.entity.Employee;
+
 import jakarta.persistence.Id;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -29,6 +31,21 @@ public class JobEmployee {
 				jobId=jobEmployee.getJobId();
 				
 			}
+				
+			public JobEmployee (Employee employee) {
+					
+				employeeId = employee.getEmployeeId();
+				employeeFirstName = employee.getEmployeeFirstName();
+				employeeLastName = employee.getEmployeeLastName();
+				employeeJobTitle = employee.getEmployeeJobTitle();
+				employeePhone = employee.getEmployeePhone();
+				employeeEmail = employee.getEmployeeEmail();
+				if(employee.getJob() != null) {
+					jobId= employee.getJob().getJobId();
+				}
+					
+			}
+			
 
 			
 		

@@ -146,6 +146,7 @@ public class EquipmentService {
         copyJobFields(job, jobData);
         jobDao.save(job);
         return new JobData(job);
+        
     }
 
 
@@ -187,6 +188,7 @@ public class EquipmentService {
     	jobEmployee.setEmployeeJobTitle(employee.getEmployeeJobTitle()); 
     	jobEmployee.setEmployeePhone(employee.getEmployeePhone()); 
     	jobEmployee.setEmployeeEmail(employee.getEmployeeEmail());
+    	jobEmployee.setJobId(employee.getJob().getJobId());
 
     	
     }

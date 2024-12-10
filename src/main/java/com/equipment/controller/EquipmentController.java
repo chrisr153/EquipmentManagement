@@ -32,7 +32,7 @@ public class EquipmentController {
     @Autowired
     private EquipmentService equipmentService;
 
-    // JOB CRUD OPERATIONS
+    // JOB-POST NEW JOB INFORMATION
 
     @PostMapping("/job")
     @ResponseStatus(code = HttpStatus.CREATED)
@@ -41,6 +41,7 @@ public class EquipmentController {
         return equipmentService.saveEquipmentJob(equipmentJob);
     }
 
+    //UPDATE- EXISTING JOB INFORMATION
     @PutMapping("/job/{jobId}")
     public JobData updateJob(@PathVariable Long jobId, @RequestBody JobData equipmentJob) {
         equipmentJob.setJobId(jobId);
@@ -48,18 +49,20 @@ public class EquipmentController {
         return equipmentService.saveEquipmentJob(equipmentJob);
     }
 
+    //RETRIEVES ALL JOBS AND ASSISGNED EQUIPMENT AND EMPLOYEES
     @GetMapping("/job")
     public List<JobData> retrieveAllJobs() {
         log.info("Retrieving all Jobs Info");
         return equipmentService.retrieveAllJobs();
     }
-
+    //GET- JOB BY ID AND ALL ASSIGNED EQUIPMENT AND EMPLOYEES
     @GetMapping("/job/{jobId}")
     public JobData retrieveJobById(@PathVariable Long jobId) {
         log.info("Retrieving Job info with ID={}", jobId);
         return equipmentService.retrieveJobById(jobId);
     }
     
+    //POST- POST NEW EQUIPMENT TO JOB
     // EQUIPMENT 
     @PostMapping("/{jobId}/equipment")
     @ResponseStatus(code = HttpStatus.CREATED)
@@ -68,7 +71,7 @@ public class EquipmentController {
        return equipmentService.saveJobEquipment(jobEquipment);
     }
     
-    //EMPLOYEE
+    //POST- NEW EMPLOYEE TO JOB
     @PostMapping("/{jobId}/employee")
     @ResponseStatus(code= HttpStatus.CREATED)
     public Employee addEmployeeToJob(@PathVariable Long jobId, @RequestBody JobEmployee jobEmployee) {
@@ -76,6 +79,8 @@ public class EquipmentController {
     	jobEmployee.setJobId(jobId);
         return equipmentService.saveJobEmployee(jobEmployee);
     }
+    
+    //UPDATE- EXISTING EQUIPMENT INFORMATION
     @PutMapping("/equipment/{equipmentId}")
     public JobEquipment updateJobEquipment(@PathVariable Long equipmentId, @RequestBody JobEquipment jobEquipment) {
         jobEquipment.setEquipmentId(equipmentId);
@@ -83,18 +88,21 @@ public class EquipmentController {
         return equipmentService.saveJobEquipment(jobEquipment);
     }
 
+    //GET- ALL EQUIPMENT LIST
     @GetMapping("/equipment")
     public List<JobEquipment> retrieveAllEquipment() {
         log.info("Retrieving all Equipment Info");
         return equipmentService.retrieveAllEquipment();
     }
 
+    //GET- EQUIPMENT BY ID
     @GetMapping("/equipment/{equipmentId}")
     public JobEquipment retrieveEquipmentById(@PathVariable Long equipmentId) {
         log.info("Retrieving equipment info with ID={}", equipmentId);
         return equipmentService.retrieveEquipmentById(equipmentId);
     }
 
+    //DELETE- EQUIPMENT BY ID
     @DeleteMapping("/{equipmentId}")
     public ResponseEntity<Map<String,String>> deleteEquipmentById1(@PathVariable Long equipmentId) {
         log.info("Deleting equipment info with ID={}", equipmentId);
@@ -104,7 +112,7 @@ public class EquipmentController {
     
     }
 
-    // EMPLOYEE CRUD OPERATIONS
+    //UPDATE- EXISITNG EMPLOYEE INFORMATION
     @PutMapping("/employee/{employeeId}")
     public Employee updateEmployee(@PathVariable Long employeeId, @RequestBody JobEmployee employee) {
         employee.setEmployeeId(employeeId);
@@ -112,12 +120,14 @@ public class EquipmentController {
         return equipmentService.updateJobEmployee(employeeId, employee);
     }
 
+    //GET- EMPLOYEE INFORMATION BY ID AND ASSIGNED JOB INFORMATION
     @GetMapping("/employee/{employeeId}")
     public Employee retrieveEmployeeById(@PathVariable Long employeeId) {
         log.info("Retrieving employee info with ID={}", employeeId);
         return equipmentService.retrieveEmployeeById(employeeId);
     }
     
+    //GET- LIST OF ALL EMPLOYEES AND ASSIGNED JOB ID
     @GetMapping("/employee")
     public List<JobEmployee> retrieveAllEmployees() {
         log.info("Retrieving all employees");
