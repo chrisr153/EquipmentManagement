@@ -109,7 +109,7 @@ public class EquipmentService {
         employeeDao.delete(employee);
     }
     @Transactional 
-    public Employee saveJobEmployee(JobEmployee jobEmployee) { 
+    public JobEmployee saveJobEmployee(JobEmployee jobEmployee) { 
        	Long jobId = jobEmployee.getJobId();
     	Long employeeId = jobEmployee.getEmployeeId(); 
     	Employee employee = findOrCreateEmployee(employeeId); 
@@ -117,9 +117,9 @@ public class EquipmentService {
     	Job job = findJobById(jobId);
     	employee.setJob(job);
     	job.getEmployee().add(employee);
-    	employee = employeeDao.save(employee); 
+   Employee	dBEmployee = employeeDao.save(employee); 
     	
-    	return employee;
+    	return new JobEmployee(dBEmployee);
     }
 
    
@@ -234,4 +234,15 @@ public class EquipmentService {
         return jobDao.findById(jobId)
             .orElseThrow(() -> new NoSuchElementException("Job with ID=" + jobId + " not found."));
     }
+
+	public void addEquipmentToEmployee(Long employeeId, Long equipmentId) {
+		Employee employee = findEmployeeById(employeeId);
+		Equipment equipment = findEquipmentById(equipmentId);
+		employee.getEquipment().add(equipment);
+		equipment.getEmployee().add(employee);
+		
+		employeeDao.save(employee);
+		equipmentDao.save(equipment);
+		
+	}
 }

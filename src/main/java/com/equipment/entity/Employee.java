@@ -1,5 +1,6 @@
 package com.equipment.entity;
 
+import java.util.HashSet;
 import java.util.Set;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -36,10 +37,10 @@ public class Employee {
     @JoinColumn(name="job_id")
     private Job job;
 
-    @ManyToMany(mappedBy = "employee", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    private Set<Equipment> equipment;
+    @ManyToMany(mappedBy = "employee", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private Set<Equipment> equipment = new HashSet<Equipment>();
 
 	
  }

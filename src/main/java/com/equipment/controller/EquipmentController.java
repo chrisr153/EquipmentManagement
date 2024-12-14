@@ -74,7 +74,7 @@ public class EquipmentController {
     //POST- NEW EMPLOYEE TO JOB
     @PostMapping("/{jobId}/employee")
     @ResponseStatus(code= HttpStatus.CREATED)
-    public Employee addEmployeeToJob(@PathVariable Long jobId, @RequestBody JobEmployee jobEmployee) {
+    public JobEmployee addEmployeeToJob(@PathVariable Long jobId, @RequestBody JobEmployee jobEmployee) {
     	log.info("Creating Employee record for job with ID={}", jobId);
     	jobEmployee.setJobId(jobId);
         return equipmentService.saveJobEmployee(jobEmployee);
@@ -140,6 +140,14 @@ public class EquipmentController {
        log.info("Deleting employee info with ID={}", employeeId);
       equipmentService.deleteEmployeeById(employeeId);
        return Map.of("message", "Employee with ID=" + employeeId + " was deleted.");
+    }
+
+    
+    // POST FOR JOIN TABLE MAPPING JOIN EMPLOYEE AND EQUIPMENT
+    @PostMapping("/{employeeId}/{equipmentId}")
+    public Map<String, String> addEquipmentToEmployee(@PathVariable Long employeeId, @PathVariable Long equipmentId) {
+    	equipmentService.addEquipmentToEmployee(employeeId,equipmentId);
+    	return Map.of("message","Equipment with ID=" + equipmentId+ " was added to Employee with ID="+ employeeId);
     }
 
     

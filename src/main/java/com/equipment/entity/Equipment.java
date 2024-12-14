@@ -1,5 +1,6 @@
 package com.equipment.entity;
 
+import java.util.HashSet;
 import java.util.Set;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -29,7 +30,7 @@ public class Equipment {
 
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    @ManyToOne //removed cascade all. deleting equipment was also deleting all equipment associated with job. 
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "job_id")
     private Job job;
 
@@ -37,9 +38,9 @@ public class Equipment {
     @ToString.Exclude
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "employee_equipment",
-               joinColumns = @JoinColumn(name = "employee_id"),
-               inverseJoinColumns = @JoinColumn(name = "equipment_id"))
-    private Set<Employee> employee; 
+               joinColumns = @JoinColumn(name = "equipment_id"),
+               inverseJoinColumns = @JoinColumn(name = "employee_id"))
+    private Set<Employee> employee = new HashSet<>(); 
     
       
 }
